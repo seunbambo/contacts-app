@@ -5,7 +5,14 @@ import { GlobalContext } from "../../context/Provider";
 export default () => {
   const [form, setForm] = useState({});
 
-  const { authDispatch } = useContext(GlobalContext);
+  const {
+    authDispatch,
+    authState: {
+      auth: { loading },
+    },
+  } = useContext(GlobalContext);
+
+  console.log("loading: ", loading);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
@@ -22,5 +29,5 @@ export default () => {
   const onSubmit = () => {
     register(form)(authDispatch);
   };
-  return { form, onChange, registerFormValid, onSubmit };
+  return { form, onChange, registerFormValid, onSubmit, loading };
 };

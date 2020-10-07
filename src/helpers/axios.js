@@ -6,7 +6,7 @@ console.log("BASE_URL: ", baseURL);
 let headers = {};
 
 if (localStorage.token) {
-  headers.Authorizeation = `Bearer localStorage.token`;
+  headers.Authorization = `Bearer localStorage.token`;
 }
 
 const axiosInstance = axios.create({

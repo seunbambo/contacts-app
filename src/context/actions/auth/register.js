@@ -1,4 +1,9 @@
 import axiosInstance from "../../../helpers/axios";
+import {
+  REGISTER_ERROR,
+  REGISTER_LOADING,
+  REGISTER_SUCCESS,
+} from "./../../../constants/actionTypes/index";
 
 export const register = ({
   email,
@@ -7,6 +12,9 @@ export const register = ({
   lastName: last_name,
   firstName: first_name,
 }) => (dispatch) => {
+  dispatch({
+    type: REGISTER_LOADING,
+  });
   axiosInstance
     .post("/auth/register", {
       email,
@@ -15,6 +23,16 @@ export const register = ({
       last_name,
       first_name,
     })
-    .then((res) => console.log("res", res))
-    .catch((err) => console.log("e", err));
+    .then((res) => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: REGISTER_ERROR,
+        payload: err.response.data,
+      });
+    });
 };

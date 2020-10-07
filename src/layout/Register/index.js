@@ -9,7 +9,7 @@ import {
 import Header from "./../../components/Header/index";
 
 const RegisterUI = ({
-  form: { onChange, form, registerFormValid, onSubmit },
+  form: { onChange, form, registerFormValid, onSubmit, loading },
 }) => {
   return (
     <div>
@@ -70,11 +70,12 @@ const RegisterUI = ({
               </Form.Field>
 
               <Button
-                disabled={registerFormValid}
+                onClick={onSubmit}
+                disabled={registerFormValid || loading}
                 fluid
+                loading={loading}
                 primary
                 type="submit"
-                onClick={onSubmit}
               >
                 Submit
               </Button>
